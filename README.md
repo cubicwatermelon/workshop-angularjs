@@ -367,9 +367,12 @@ someModule.directive('myCustomer', function() {
     return {
       restrict: 'E',
       scope: {
+        // = : two-way databinding
+        // @ : plain-text databinding
+        // & : callback function databinding
         customerInfo: '=info'
       },
-      template: '<p>{{ info.name }}</p>'
+      template: '<p>{{ customerInfo.name }}</p>'
     };
   });
 ```
@@ -436,8 +439,119 @@ Gera
 
 ### Services
 
-#### Store
+```javascript
+myModule.factory('serviceId', function() {
+  let shinyNewServiceInstance;
+  
+  // ...
 
-#### Http
+  return shinyNewServiceInstance;
+});
+```
 
 ### Components
+
+```javascript
+angular.module('heroApp').component('heroDetail', {
+  template: '<p>{{ $ctrl.hero.name }}</p>',
+  bindings: {
+    // < : one-way databinding
+    // = : two-way databinding
+    // @ : plain-text databinding
+    hero: '='
+  }
+});
+```
+
+```html
+<hero-detail hero="{name: 'Batman'}"><hero-detail>
+```
+
+Gera
+
+```html
+<p>Batman</p>
+```
+
+### Routes
+
+#### ng-router: só aceita templates e controllers
+```html
+<body ng-app="myApp">
+
+  <p><a href="#/!">Main</a></p>
+
+  <a href="#!red">Red</a>
+  <a href="#!green">Green</a>
+  <a href="#!blue">Blue</a>
+
+  <div ng-view></div>
+
+  <script>
+    var app = angular.module("myApp", ["ngRoute"]);
+    app.config(function($routeProvider) {
+      $routeProvider
+        .when("/", {
+          template : "<h3>main<h3>"
+        })
+        .when("/red", {
+          template: '<h3 style="color: red;">red</h3>'
+        })
+        .when("/green", {
+          template: '<h3 style="color: green;">green</h3>'
+        })
+        .when("/blue", {
+          template: '<h3 style="color: blue;">blue</h3>'
+        });
+    });
+  </script>
+</body>
+```
+
+#### ui-router: aceita componetes, controllers, templates e estados sem url
+
+```html
+<body ng-app="myApp">
+
+  <p><a ui-sref="">Main</a></p>
+
+  <a ui-sref="red">Red</a>
+  <a ui-sref="green">Green</a>
+  <a ui-sref="blue">Blue</a>
+
+  <div ui-view></div>
+
+  <script>
+    var app = angular.module("myApp", ["ui.router"]);
+    app.config(function($routeProvider) {
+      const red = {
+        name: 'main',
+        url: '/',
+        template: '<h3>main</h3>'
+      };
+
+      const red = {
+        name: 'red',
+        url: '/red',
+        template: '<h3 style="color: red;">red</h3>'
+      };
+
+      const green = {
+        name: 'green',
+        url: '/green',
+        template: '<h3 style="color: green;">green</h3>'
+      };
+
+      const blue = {
+        name: 'green',
+        url: '/blue',
+        template: '<h3 style="color: blue;">blue</h3>'
+      };
+
+      $stateProvider.state(red);
+      $stateProvider.state(green);
+      $stateProvider.state(blue);
+    });
+  </script>
+</body>
+```
