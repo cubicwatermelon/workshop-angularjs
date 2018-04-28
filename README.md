@@ -195,8 +195,41 @@ let handlers = {
 // Same as: handlers = { 'onclick': true }
 ```
 
-## Módulos
 
-## Controllers e Views
+## AngularJS
 
-##
+### Módulos
+
+### Controllers e Views
+
+### Directives
+
+#### Nativas
+
+##### ng-if
+
+##### ng-show
+
+##### ng-hide
+
+##### ng-repeat
+
+##### Eventos
+
+#### Customizadas
+
+##### Shared Scope
+
+##### One-way Scope
+
+##### Isolated Scope
+
+### Filters
+
+### Services
+
+#### Store
+
+#### Http
+
+### Components
