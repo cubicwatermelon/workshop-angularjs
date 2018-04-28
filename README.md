@@ -1,6 +1,6 @@
 # ES6
 
-## Block scoping (let e const)
+## Block scoping
 
 ```javascript
 // let = pertence ao bloco, não ao escopo da função
