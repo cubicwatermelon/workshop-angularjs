@@ -314,7 +314,7 @@ someModule.controller('NaomiController', ['$scope', function($scope) {
   .directive('myCustomer', function() {
     return {
       restrict: 'E',
-      template: '<p>{{ info.name }}</p>'
+      template: '<p>{{ customer.name }}</p>'
     };
   });
 
