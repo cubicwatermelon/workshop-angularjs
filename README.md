@@ -198,6 +198,16 @@ let handlers = {
 
 ## AngularJS
 
+#### IIFE
+
+```javascript
+(function (angular) {
+  'use strict';
+  
+  // ...
+}(angular));
+```
+
 ### Módulos
 
 ### Controllers e Views
@@ -214,11 +224,62 @@ let handlers = {
 
 ##### ng-repeat
 
+##### ng-model
+
 ##### Eventos
 
 #### Customizadas
 
+```javascript
+angular.module('docsIsolateScopeDirective', [])
+  .directive('myCustomer', function() {
+    return {
+      // 'A' - only matches attribute name
+      // 'E' - only matches element name
+      // 'C' - only matches class name
+      // 'M' - only matches comment
+      restrict: 'E',
+      scope: {
+        customerInfo: '=info'
+      },
+      template: '<p>{{ info.name }}</p>'
+    };
+  });
+```
+
 ##### Shared Scope
+
+```javascript
+angular.module('docsScopeProblemExample', [])
+  .controller('NaomiController', ['$scope', function($scope) {
+    $scope.customer = {
+      name: 'Naomi'
+    };
+  }])
+  .controller('IgorController', ['$scope', function($scope) {
+    $scope.customer = {
+      name: 'Igor'
+    };
+  }])
+  .directive('myCustomer', function() {
+    return {
+      restrict: 'E',
+      template: '<p>{{ info.name }}</p>'
+    };
+  });
+```
+
+Gera 
+
+```html
+<div ng-controller="NaomiController">
+  <p>Naomi</p>
+</div>
+
+<div ng-controller="NaomiController">
+  <p>Igor</p>
+</div>
+```
 
 ##### One-way Scope
 
