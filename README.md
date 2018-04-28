@@ -556,7 +556,7 @@ Gera
 </body>
 ```
 
-# Templates: 
+# Templates Javascript: 
 ```javascript
 (function() {
     'use strict';
@@ -703,4 +703,20 @@ Gera
 		}
 
 })();
+```
+# Template HTML: 
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+  </div>
+  <script src="../../../node_modules/angular/angular.min.js"></script>
+</body>
+</html>
 ```
