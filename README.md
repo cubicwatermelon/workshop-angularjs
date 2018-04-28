@@ -555,3 +555,152 @@ Gera
   </script>
 </body>
 ```
+
+# Templates: 
+```javascript
+(function() {
+    'use strict';
+
+    angular
+        .module('module')
+        .controller('Controller', Controller);
+
+    Controller.$inject = ['dependencies'];
+
+    /* @ngInject */
+    function Controller(dependencies) {
+        var vm = this;
+        vm.title = 'Controller';
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+        }
+    }
+})();
+
+====================================
+
+(function() {
+    'use strict';
+
+    angular
+        .module('module')
+        .filter('filter', filter);
+
+    function filter() {
+        return filterFilter;
+
+        ////////////////
+
+        function filterFilter(params) {
+            return params;
+        }
+    }
+
+})();
+
+======================================
+
+(function() {
+    'use strict';
+
+    angular
+        .module('module')
+        .directive('directive', directive);
+
+    directive.$inject = ['dependencies'];
+
+    /* @ngInject */
+    function directive(dependencies) {
+        // Usage:
+        //
+        // Creates:
+        //
+        var directive = {
+            bindToController: true,
+            controller: Controller,
+            controllerAs: 'vm',
+            link: link,
+            restrict: 'A',
+            scope: {
+            }
+        };
+        return directive;
+
+        function link(scope, element, attrs) {
+        }
+    }
+
+    /* @ngInject */
+    function Controller() {
+
+    }
+})();
+
+=================================
+
+(function() {
+    'use strict';
+
+    angular
+        .module('module')
+        .factory('factory', factory);
+
+    factory.$inject = ['dependencies'];
+
+    /* @ngInject */
+    function factory(dependencies) {
+        var service = {
+            func: func
+        };
+        return service;
+
+        ////////////////
+
+        function func() {
+        }
+    }
+})();
+===============================
+
+(function() {
+    'use strict';
+
+    angular
+        .module('module')
+        .component('component', {
+            bindings: {
+
+            },
+            controller: Controller
+
+        });
+
+    Controller.$inject = ['dependencies'];
+
+    /* @ngInject */
+    function Controller(dependencies) {
+
+    }
+})();
+
+====================================
+
+(function() {
+    'use strict';
+
+    angular
+        .module('AppTesteServices')
+        .config(RouterApp);
+
+    RouterApp.$inject = ['$routeProvider'];
+
+    function RouterApp($routeProvider) {
+
+		}
+
+})();
+```
