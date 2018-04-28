@@ -720,3 +720,25 @@ Gera
 </body>
 </html>
 ```
+# package.json
+```javascript
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.10",
+    "angular-input-masks": "^4.1.0",
+    "angular-locale-pt-br": "^1.3.16",
+    "angular-pea-slider": "^1.7.0",
+    "angular-route": "^1.6.10",
+    "grunt": "^1.0.2"
+  }
+}
+```
