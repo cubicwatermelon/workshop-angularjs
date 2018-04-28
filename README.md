@@ -210,6 +210,26 @@ let handlers = {
 
 ### Módulos
 
+#### Básico
+
+```javascript
+  angular.module('MyBasicApp', [])
+```
+
+#### Composto
+
+```javascript
+  angular.module('MyApp.Controllers', [])
+```
+
+```javascript
+  angular.module('MyApp.Services', [])
+```
+
+```javascript
+  angular.module('MyComposedApp', ['MyApp.Controllers', 'MyApp.Services'])
+```
+
 ### Controllers e Views
 
 #### Dependency Injection
@@ -314,7 +334,7 @@ someModule.controller('NaomiController', ['$scope', function($scope) {
   .directive('myCustomer', function() {
     return {
       restrict: 'E',
-      template: '<p>{{ customer.name }}</p>'
+      template: '<p>{{ info.name }}</p>'
     };
   });
 
@@ -378,6 +398,16 @@ Gera
 ```
 
 #### Nativos
+
+- currency
+- date
+- filter
+- json
+- limitTo
+- lowercase
+- number
+- orderBy
+- uppercase
 
 #### Customizado
 
