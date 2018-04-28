@@ -212,27 +212,78 @@ let handlers = {
 
 ### Controllers e Views
 
+#### Dependency Injection
+
+```javascript
+someModule.controller('MyController', ['$scope', 'greeter', function($scope, greeter) {
+  // ...
+}]);
+
+// --------------------------------------------------------------------------------------
+
+var MyController = function($scope, greeter) {
+  // ...
+}
+
+MyController.$inject = ['$scope', 'greeter'];
+
+someModule.controller('MyController', MyController);
+```
+
 ### Directives
 
 #### Nativas
 
 ##### ng-if
 
+```html
+<p ng-if="user.active">{{ user.name }}</p>
+```
+
 ##### ng-show
+
+```html
+<p ng-show="user.active">{{ user.name }}</p>
+```
 
 ##### ng-hide
 
+```html
+<p ng-hide="!user.active">{{ user.name }}</p>
+```
+
 ##### ng-repeat
+
+```html
+<p ng-repeat="user in users">{{ user.name }}</p>
+```
 
 ##### ng-model
 
+```html
+<input type="text" ng-model="user.name" />
+```
+
 ##### Eventos
+
+```html
+<input type="text" ng-click="showAlert()" />
+```
+
+```html
+<input type="text" ng-change="showAlert()" />
+```
+
+```html
+<form ng-submit="saveUser()">
+  <button type="submit">Send</button>
+</form>
+```
 
 #### Customizadas
 
 ```javascript
-angular.module('docsIsolateScopeDirective', [])
-  .directive('myCustomer', function() {
+someModule.directive('myCustomer', function() {
     return {
       // 'A' - only matches attribute name
       // 'E' - only matches element name
@@ -250,8 +301,7 @@ angular.module('docsIsolateScopeDirective', [])
 ##### Shared Scope
 
 ```javascript
-angular.module('docsScopeProblemExample', [])
-  .controller('NaomiController', ['$scope', function($scope) {
+someModule.controller('NaomiController', ['$scope', function($scope) {
     $scope.customer = {
       name: 'Naomi'
     };
@@ -267,25 +317,92 @@ angular.module('docsScopeProblemExample', [])
       template: '<p>{{ info.name }}</p>'
     };
   });
+
+```html
+<div ng-controller="NaomiController">
+  <my-customer></my-customer>
+</div>
+
+<div ng-controller="IgorController">
+  <my-customer></my-customer>
+</div>
 ```
 
 Gera 
 
 ```html
-<div ng-controller="NaomiController">
+<div>
   <p>Naomi</p>
 </div>
 
-<div ng-controller="NaomiController">
+<div>
   <p>Igor</p>
 </div>
 ```
 
-##### One-way Scope
-
 ##### Isolated Scope
 
+```javascript
+someModule.directive('myCustomer', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        customerInfo: '=info'
+      },
+      template: '<p>{{ info.name }}</p>'
+    };
+  });
+```
+
+```html
+<my-customer customer-info="{name: 'John'}"></my-customer>
+```
+
+Gera 
+
+
+```html
+<p>John</p>
+```
+
 ### Filters
+
+```html
+{{ expression | filter }}
+
+{{ expression | filter1 | filter2 | ... }}
+
+{{ expression | filter:argument1:argument2:... }}
+
+{{ 1234 | number:2 }} // 12.34
+```
+
+#### Nativos
+
+#### Customizado
+
+```javascript
+someModule.filter('decorate', function(decoration) {
+
+    function decorateFilter(input) {
+      return `*${input}*`;
+    }
+
+    decorateFilter.$stateful = true;
+
+    return decorateFilter;
+  })
+```
+
+```html
+{{ 'esse ai dibra muito!' | decorate }}
+```
+
+Gera
+
+```html
+*esse ai dibra muito!*
+```
 
 ### Services
 
